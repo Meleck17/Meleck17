@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Graphisme - Profil Utilisateur</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .phone-container {
+            display: flex;
+            align-items: center;
+        }
+        .phone-container img {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Star Graphisme - Mon Profil</h1>
+</header>
+
+<div class="container">
+    <h2>Informations personnelles</h2>
+    <form id="profile-form">
+        <div class="form-group">
+            <label for="first-name">Prénom :</label>
+            <input type="text" id="first-name" name="first-name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="last-name">Nom :</label>
+            <input type="text" id="last-name" name="last-name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Numéro de téléphone :</label>
+            <div class="phone-container">
+                <select id="phone-code">
+                    <!-- Options d'indicatifs internationaux européens avec les drapeaux -->
+                    <option value="+33" data-flag="🇫🇷">France (+33)</option>
+                    <option value="+32" data-flag="🇧🇪">Belgique (+32)</option>
+                    <option value="+41" data-flag="🇨🇭">Suisse (+41)</option>
+                    <option value="+49" data-flag="🇩🇪">Allemagne (+49)</option>
+                    <option value="+44" data-flag="🇬🇧">Royaume-Uni (+44)</option>
+                    <!-- Ajouter d'autres pays européens -->
+                </select>
+                <input type="tel" id="phone-number" name="phone-number" placeholder="Numéro de téléphone">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Adresse :</label>
+            <input type="text" id="address" name="address" placeholder="Adresse complète">
+        </div>
+
+        <div class="form-group">
+            <label for="postal-code">Code Postal :</label>
+            <input type="text" id="postal-code" name="postal-code" required>
+        </div>
+
+        <div class="form-group">
+            <label for="city">Ville :</label>
+            <input type="text" id="city" name="city" required>
+        </div>
+
+        <div class="form-group">
+            <label for="state">Département :</label>
+            <input type="text" id="state" name="state" required>
+        </div>
+
+        <div class="form-group">
+            <label for="country">Pays :</label>
+            <select id="country" name="country" required>
+                <option value="France">France</option>
+                <option value="Belgique">Belgique</option>
+                <option value="Suisse">Suisse</option>
+                <option value="Allemagne">Allemagne</option>
+                <option value="Royaume-Uni">Royaume-Uni</option>
+                <!-- Ajouter d'autres pays -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="dob">Date de naissance :</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <button type="submit">Enregistrer les modifications</button>
+    </form>
+</div>
+
+<footer>
+    &copy; 2024 Star Graphisme. Tous droits réservés.
+</footer>
+
+<script>
+    // Charger les données de l'utilisateur depuis le localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('first-name').value = localStorage.getItem('firstName') || '';
+        document.getElementById('last-name').value = localStorage.getItem('lastName') || '';
+        document.getElementById('email').value = localStorage.getItem('email') || '';
+        document.getElementById('phone-number').value = localStorage.getItem('phoneNumber') || '';
+        document.getElementById('address').value = localStorage.getItem('address') || '';
+        document.getElementById('postal-code').value = localStorage.getItem('postalCode') || '';
+        document.getElementById('city').value = localStorage.getItem('city') || '';
+        document.getElementById('state').value = localStorage.getItem('state') || '';
+        document.getElementById('country').value = localStorage.getItem('country') || '';
+        document.getElementById('dob').value = localStorage.getItem('dob') || '';
+    });
+
+    // Sauvegarder les données modifiées de l'utilisateur dans le localStorage
+    document.getElementById('profile-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        localStorage.setItem('firstName', document.getElementById('first-name').value);
+        localStorage.setItem('lastName', document.getElementById('last-name').value);
+        localStorage.setItem('email', document.getElementById('email').value);
+        localStorage.setItem('phoneCode', document.getElementById('phone-code').value);
+        localStorage.setItem('phoneNumber', document.getElementById('phone-number').value);
+        localStorage.setItem('address', document.getElementById('address').value);
+        localStorage.setItem('postalCode', document.getElementById('postal-code').value);
+        localStorage.setItem('city', document.getElementById('city').value);
+        localStorage.setItem('state', document.getElementById('state').value);
+        localStorage.setItem('country', document.getElementById('country').value);
+        localStorage.setItem('dob', document.getElementById('dob').value);
+
+        alert('Les modifications ont été enregistrées avec succès.');
+    });
+</script>
+
+</body>
+</html>

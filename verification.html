@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Graphisme - Vérification Email</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .code-input {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            text-align: center;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .code-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Star Graphisme - Vérification Email</h1>
+</header>
+
+<div class="container">
+    <h2>Vérification de votre adresse email</h2>
+    <form id="verification-form">
+        <div class="code-container">
+            <input type="text" maxlength="1" class="code-input" id="digit-1" required>
+            <input type="text" maxlength="1" class="code-input" id="digit-2" required>
+            <input type="text" maxlength="1" class="code-input" id="digit-3" required>
+            <input type="text" maxlength="1" class="code-input" id="digit-4" required>
+            <input type="text" maxlength="1" class="code-input" id="digit-5" required>
+            <input type="text" maxlength="1" class="code-input" id="digit-6" required>
+        </div>
+        <button type="submit">Vérifier</button>
+    </form>
+    <p id="error-message" style="color: red; display: none;">Code incorrect. Veuillez réessayer.</p>
+</div>
+
+<footer>
+    &copy; 2024 Star Graphisme. Tous droits réservés.
+</footer>
+
+<script>
+    document.querySelectorAll('.code-input').forEach((input, index, inputs) => {
+        input.addEventListener('input', () => {
+            if (input.value.length === 1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            } else if (input.value.length === 0 && index > 0) {
+                inputs[index - 1].focus();
+            }
+        });
+    });
+
+    document.getElementById('verification-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const enteredCode = [
+            document.getElementById('digit-1').value,
+            document.getElementById('digit-2').value,
+            document.getElementById('digit-3').value,
+            document.getElementById('digit-4').value,
+            document.getElementById('digit-5').value,
+            document.getElementById('digit-6').value
+        ].join('');
+        
+        const storedCode = localStorage.getItem('verificationCode');
+
+        if (enteredCode === storedCode) {
+            localStorage.setItem('emailVerified', true);
+            alert('Votre email a été vérifié avec succès.');
+            window.location.href = "index.html";
+        } else {
+            document.getElementById('error-message').style.display = 'block';
+        }
+    });
+</script>
+
+</body>
+</html>

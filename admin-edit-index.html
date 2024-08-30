@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier la page d'accueil</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<header>
+    <h1>Modifier la page d'accueil</h1>
+    <nav>
+        <a href="admin-dashboard.html">Retour au tableau de bord</a>
+        <a href="admin-logout.html">Déconnexion</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Modifier le contenu de la page d'accueil</h2>
+    <form id="edit-index-form">
+        <label for="welcome-text">Texte de bienvenue :</label>
+        <textarea id="welcome-text" rows="4" required>Bienvenue sur Star Graphisme</textarea>
+
+        <label for="intro-text">Texte d'introduction :</label>
+        <textarea id="intro-text" rows="6" required>Explorez nos services et projets. Prenez rendez-vous avec nous pour donner vie à vos idées créatives !</textarea>
+
+        <button type="submit">Enregistrer les modifications</button>
+    </form>
+</div>
+
+<footer>
+    &copy; 2024 Star Graphisme. Tous droits réservés.
+</footer>
+
+<script>
+    document.getElementById('edit-index-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Ici, vous pouvez implémenter le code pour enregistrer les modifications (par exemple, avec une requête à un serveur ou en local)
+        alert('Modifications enregistrées !');
+    });
+</script>
+
+</body>
+</html>

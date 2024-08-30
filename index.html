@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Graphisme - Accueil</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<header>
+    <h1>Star Graphisme</h1>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="about.html">À propos</a>
+        <a href="projects.html">Projets disponibles</a>
+        <a href="appointment.html">Prendre rendez-vous</a>
+        <a id="login-link" href="login.html">Connexion</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Bienvenue sur Star Graphisme</h2>
+    <p>Explorez nos services et projets. Prenez rendez-vous avec nous pour donner vie à vos idées créatives !</p>
+</div>
+
+<footer>
+    &copy; 2024 Star Graphisme. Tous droits réservés.
+</footer>
+
+<script>
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+    const emailVerified = localStorage.getItem('emailVerified');
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+
+    if (firstName && lastName && emailVerified && rememberMe) {
+        const loginLink = document.getElementById('login-link');
+        loginLink.textContent = `${firstName} ${lastName}`;
+        loginLink.href = "#";
+    }
+    <li><a href="profile.html">Mon Profil</a></li>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (localStorage.getItem('isLoggedIn')) {
+            document.getElementById('login-button').innerText = localStorage.getItem('userName');
+        }
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Graphisme - Connexion</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        button:hover {
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .create-account-btn {
+            background-color: #007BFF;
+        }
+        .error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Star Graphisme - Connexion</h1>
+</header>
+
+<div class="container">
+    <h2>Connexion à votre compte</h2>
+    <form id="login-form">
+        <div class="form-group">
+            <label for="email">Adresse Email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">Se connecter</button>
+
+        <p class="error-message" id="login-error">Email ou mot de passe incorrect.</p>
+    </form>
+
+    <button class="create-account-btn" onclick="redirectToSignup()">Créer un compte</button>
+</div>
+
+<footer>
+    &copy; 2024 Star Graphisme. Tous droits réservés.
+</footer>
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Récupérer les valeurs des champs
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Récupérer les données de l'utilisateur à partir du localStorage
+        const storedUser = JSON.parse(localStorage.getItem(email));
+
+        if (storedUser && storedUser.password === password) {
+            // Stocker l'information de connexion dans le localStorage
+            localStorage.setItem('isLoggedIn', true);
+            localStorage.setItem('userName', storedUser.firstName + ' ' + storedUser.lastName);
+
+            // Redirection vers la page d'accueil après connexion
+            window.location.href = "index.html";
+        } else {
+            // Afficher un message d'erreur si les informations sont incorrectes
+            document.getElementById('login-error').style.display = 'block';
+        }
+    });
+
+    // Fonction pour rediriger vers la page de création de compte
+    function redirectToSignup() {
+        window.location.href = "signup.html";
+    }
+</script>
+
+</body>
+</html>

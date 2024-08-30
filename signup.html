@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Graphisme - Créer un compte</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        button:hover {
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .password-criteria {
+            list-style: none;
+            padding: 0;
+        }
+        .password-criteria li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .password-criteria li.valid {
+            color: green;
+        }
+        .strength-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            margin-top: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .strength-bar div {
+            height: 100%;
+            transition: width 0.3s;
+        }
+        .strength-weak { background-color: red; width: 25%; }
+        .strength-medium { background-color: yellow; width: 50%; }
+        .strength-strong { background-color: green; width: 75%; }
+        .strength-very-strong { background-color: darkgreen; width: 100%; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Star Graphisme - Créer un compte</h1>
+</header>
+
+<div class="container">
+    <h2>Inscription</h2>
+    <form id="register-form">
+        <div class="form-group">
+            <label for="first-name">Prénom :</label>
+            <input type="text" id="first-name" name="first-name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="last-name">Nom :</label>
+            <input type="text" id="last-name" name="last-name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Adresse Email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+            <ul class="password-criteria">
+                <li id="length-criteria">8 caractères minimum</li>
+                <li id="uppercase-criteria">Une majuscule</li>
+                <li id="lowercase-criteria">Une minuscule</li>
+                <li id="special-char-criteria">Un caractère spécial (@, *, $, ., &, +, etc.)</li>
+            </ul>
+            <div class="strength-bar">
+                <div id="strength-indicator"></div>
+            </div>
+            <span id="strength-text"></span>
+        </div>
+
+        <button type="submit">Créer un compte</button>
+    </form>
+</div>
+
+<footer>
+    &copy; 2024 Star Graphisme. Tous droits réservés.
+</footer>
+
+<script>
+    const passwordInput = document.getElementById('password');
+    const lengthCriteria = document.getElementById('length-criteria');
+    const uppercaseCriteria = document.getElementById('uppercase-criteria');
+    const lowercaseCriteria = document.getElementById('lowercase-criteria');
+    const specialCharCriteria = document.getElementById('special-char-criteria');
+    const strengthIndicator = document.getElementById('strength-indicator');
+    const strengthText = document.getElementById('strength-text');
+
+    passwordInput.addEventListener('input', function() {
+        const password = passwordInput.value;
+
+        // Vérifier les conditions du mot de passe
+        const lengthValid = password.length >= 8;
+        const uppercaseValid = /[A-Z]/.test(password);
+        const lowercaseValid = /[a-z]/.test(password);
+        const specialCharValid = /[@*$.&+]/.test(password);
+
+        // Mettre à jour les critères visuellement
+        updateCriteria(lengthValid, lengthCriteria);
+        updateCriteria(uppercaseValid, uppercaseCriteria);
+        updateCriteria(lowercaseValid, lowercaseCriteria);
+        updateCriteria(specialCharValid, specialCharCriteria);
+
+        // Calculer la force du mot de passe
+        const strength = calculateStrength(lengthValid, uppercaseValid, lowercaseValid, specialCharValid);
+
+        // Mettre à jour l'indicateur de force
+        updateStrengthBar(strength);
+    });
+
+    function updateCriteria(isValid, element) {
+        if (isValid) {
+            element.classList.add('valid');
+        } else {
+            element.classList.remove('valid');
+        }
+    }
+
+    function calculateStrength(length, uppercase, lowercase, specialChar) {
+        let strength = 0;
+        if (length) strength++;
+        if (uppercase) strength++;
+        if (lowercase) strength++;
+        if (specialChar) strength++;
+        return strength;
+    }
+
+    function updateStrengthBar(strength) {
+        switch (strength) {
+            case 1:
+                strengthIndicator.className = 'strength-weak';
+                strengthText.textContent = 'Faible';
+                break;
+            case 2:
+                strengthIndicator.className = 'strength-medium';
+                strengthText.textContent = 'Moyen';
+                break;
+            case 3:
+                strengthIndicator.className = 'strength-strong';
+                strengthText.textContent = 'Fort';
+                break;
+            case 4:
+                strengthIndicator.className = 'strength-very-strong';
+                strengthText.textContent = 'Très Fort';
+                break;
+            default:
+                strengthIndicator.className = '';
+                strengthText.textContent = '';
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>
